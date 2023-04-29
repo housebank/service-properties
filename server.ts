@@ -13,7 +13,7 @@ const fastify = Fastify({
 const port = process.env.PORT ? Number(process.env.PORT) : 8002;
 
 fastify.register(require("fastify-knexjs"), {
-  client: process.env.DB_CLIENT,
+  client: "pg",
   connection: {
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
@@ -40,7 +40,9 @@ serverHealth.exposeHealthEndpoint(fastify, "/v1/health", "fastify");
 
 // Default route
 fastify.get("/", (req, reply) => {
-  return reply.send({
+  return reply
+    .code(200)
+    .send({
     version: process.env.VERSION,
     status: 200,
     message: `Use /v1/${process.env.SERVICE_NAME} to access the service`,
@@ -48,7 +50,9 @@ fastify.get("/", (req, reply) => {
 });
 
 fastify.get("*", (req, reply) => {
-  return reply.send({
+  return reply
+    .code(404)
+    .send({
     version: process.env.VERSION,
     status: 404,
     message: "The requested route does not exist",
