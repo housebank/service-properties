@@ -6,18 +6,20 @@ function initializeDatabaseTableWithBaseSettingsPlugin(fastify: FastifyInstance,
                                             done: FastifyPluginCallback) {
   fastify.decorate('initializeDatabaseTableWithBaseSettings', async () => {
     const { serviceName } = opts;
+    // @ts-ignore
+    const { knex } = fastify;
     try{
       // @ts-ignore
-      const exists = await fastify.knex.schema.hasTable(serviceName);
+      const exists = await knex.schema.hasTable(serviceName);
       if (!exists) {
         // @ts-ignore
-        const createTable = await fastify.knex.schema.createTable(serviceName, (table: any) => {
+        const createTable = await knex.schema.createTable(serviceName, (table: any) => {
           table.increments('id').primary();
           table.string('property_type');
           table.text('description');
           table.text('address');
-          table.timestamp('created_at', { useTz: true }).defaultTo(fastify.knex.fn.now(6));
-          table.timestamp('updated_at', { useTz: true }).defaultTo(fastify.knex.fn.now(6));
+          table.timestamp('created_at', { useTz: true }).defaultTo(knex.fn.now(6));
+          table.timestamp('updated_at', { useTz: true }).defaultTo(knex.fn.now(6));
           table.specificType('media', 'integer[]');
           table.string('city');
           table.string('country');
