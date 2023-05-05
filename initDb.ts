@@ -26,7 +26,7 @@ function initializeDatabaseTableWithBaseSettingsPlugin(fastify: FastifyInstance,
           table.decimal('price', 10, 2);
           table.boolean('availability');
           table.boolean('verified');
-          table.integer('owner_id').unsigned().inTable('user').references("id");
+          table.integer('owner_id').unsigned();
           table.string('size');
           table.integer('bedrooms');
           table.integer('bathrooms');
@@ -34,8 +34,10 @@ function initializeDatabaseTableWithBaseSettingsPlugin(fastify: FastifyInstance,
           table.integer('rating_id');
           table.specificType('reviews', 'text[]');
           table.specificType('bookings', 'integer[]');
-          table.integer('listed_by').unsigned().inTable('user').references("id");
+          table.integer('listed_by').unsigned();
           table.specificType('tags', 'text[]');
+          table.foreign("owner_id").references("id").inTable("user").onDelete("CASCADE");
+          table.foreign("listed_by").references("id").inTable("user").onDelete("CASCADE");
         });
         fastify.log.info('Database Table with name ' + serviceName + ' was created ==> ' + exists);
         return createTable;
