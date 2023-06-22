@@ -5,7 +5,7 @@ export interface IServiceDefault {
   address?: string[];
   created_at?: Date|string;
   updated_at?: Date|string;
-  media?: string[];
+  media?: number[];
   city?: string;
   country?: string;
   price?: number;
@@ -21,4 +21,5 @@ export interface IServiceDefault {
   bookings?: number[];
   listed_by?: number;
   tags?: string[];
+  deleted?: boolean;
 }

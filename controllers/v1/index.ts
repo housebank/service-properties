@@ -1,4 +1,4 @@
-import { errorCodes, FastifyInstance, FastifyReply, FastifyRequest, RequestParamsDefault } from 'fastify';
+import { FastifyInstance, FastifyReply, FastifyRequest, RequestParamsDefault } from 'fastify';
 import { IServiceDefault } from "../../types";
 
 export const queryAll = async (req: FastifyRequest, reply: FastifyReply) => {
@@ -126,8 +126,10 @@ export const deleteById = async (req: FastifyRequest, reply: FastifyReply) => {
   const { knex } = req.server as FastifyInstance ;
   // @ts-ignore
   const { id } = req.params as RequestParamsDefault;
+  const updateObject = {deleted: true};
   try {
-    const deleteQuery = await knex<IServiceDefault>(_serviceName).where("id", "=", Number(id)).del(["id"]);
+    const deleteQuery = await knex<IServiceDefault>(_serviceName).where("id", "=", Number(id))
+      .update(updateObject, ["id", "updated_at"]);
     reply
       .code(200)
       .send({

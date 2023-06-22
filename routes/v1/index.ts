@@ -52,18 +52,28 @@ const getByIdEndpoint = {
 const createNewEndpoint = {
   schema: {
     body: { type: "array", items: {type: "object", properties:{
-          name: { type: "string" },
-          nutrition_id: { type: "integer" },
-          tags: {type: "array", items: {type: "string"}, maxItems: 999},
-          visibility: { type: "boolean" },
-          allergy_info: { type: "string" },
+          property_type: { type: "string" },
           description: { type: "string" },
-          is_meal_prep: { type: "boolean" },
-          store_id: { type: "integer" },
-          media_id: { type: "integer" },
+          address: {type: "array", items: {type: "string"}, maxItems: 999},
+          media: {type: "array", items: {type: "number"}, maxItems: 999},
+          city: { type: "string" },
+          country: { type: "string" },
+          price: { type: "number" },
+          availability: { type: "boolean" },
+          verified: { type: "boolean" },
+          owner_id: { type: "number" },
+          size: { type: "string" },
+          bedrooms:{ type: "number" },
+          bathrooms: { type: "number" },
+          amenities: {type: "array", items: {type: "string"}, maxItems: 999},
+          rating_id: { type: "number" },
+          reviews: {type: "array", items: {type: "string"}, maxItems: 999},
+          bookings: {type: "array", items: {type: "number"}, maxItems: 999},
+          listed_by: { type: "number" },
+          tags: {type: "array", items: {type: "string"}, maxItems: 999},
         }}, maxItems: 999},
     response: {
-      200: {
+      201: {
         type: "object",
         properties: {
           version: { type: "string" },
