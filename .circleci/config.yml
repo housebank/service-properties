@@ -1,0 +1,38 @@
+version: 2.1
+orbs:
+  node: circleci/node@5.0.2
+  docker: circleci/docker@2.2.0
+
+jobs:
+  build_and_test:
+    executor: node/default
+    steps:
+      - checkout
+      - node/install-packages:
+          pkg-manager: yarn
+      - run:
+          command: yarn test
+          name: Run unit tests
+      - run:
+          command: yarn build
+          name: Build service
+      - persist_to_workspace:
+          root: ~/service-properties
+          paths:
+            - .
+  build_docker_and_deploy:
+    executor: docker/default
+    steps:
+      -
+
+
+workflows:
+  test-service:
+    jobs:
+      - build_and_test
+      - deploy:
+          requires:
+            - build_and_test # only deploy if the build_and_test job has completed
+          filters:
+            branches:
+              only: develop # only deploy when on main
