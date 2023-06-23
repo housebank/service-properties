@@ -16,8 +16,21 @@ jobs:
       - run:
           command: yarn build
           name: Build service
-
+  build_docker_image:
+    executor: docker/docker
+    steps:
+      - setup_remote_docker
+      - checkout
+      - docker/build:
+          extra_build_args: '--build-arg FOO=bar --build-arg BAZ=qux'
+          image: housebankng/$CIRCLE_PROJECT_REPONAME
+          tag: latest
+          docker-username: $DOCKER_USERNAME
+          docker-password: $DOCKER_PASSWORD
 workflows:
   test-service:
     jobs:
       - build_and_test
+  build_and_deploy_service_to_docker_hub:
+    jobs:
+      - build_docker_image
