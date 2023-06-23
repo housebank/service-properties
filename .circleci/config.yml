@@ -16,11 +16,6 @@ jobs:
       - run:
           command: yarn build
           name: Build service
-      - persist_to_workspace:
-          root: ~/service-properties
-          paths:
-            - .
-
 
 workflows:
   test-service:
