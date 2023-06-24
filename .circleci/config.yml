@@ -23,7 +23,10 @@ jobs:
       - checkout
       - docker/check
       - docker/build:
-          extra_build_args: '--build-arg FOO=bar --build-arg BAZ=qux'
+          extra_build_args: '--build-arg PORT=$CIRCLE_PORT --build-arg SERVICE_NAME=$CIRCLE_SERVICE_NAME 
+          --build-arg DB_HOST=$CIRCLE_DB_HOST --build-arg DB_USER=$CIRCLE_DB_USER 
+          --build-arg DB_PASS=$CIRCLE_DB_PASS --build-arg DB_NAME=$CIRCLE_DB_NAME 
+          --build-arg DB_PORT=$CIRCLE_DB_PORT --build-arg DB_CLIENT=$CIRCLE_DB_CLIENT'
           image: housebankng/$CIRCLE_PROJECT_REPONAME
           tag: latest
       - docker/push:
