@@ -5,6 +5,11 @@ orbs:
 
 jobs:
   build_and_test:
+    build:
+      filters:
+        branches:
+          only:
+            - develop
     executor: node/default
     steps:
       - checkout
@@ -17,6 +22,11 @@ jobs:
           command: yarn build
           name: Build service
   build_docker_image:
+    build:
+      filters:
+        branches:
+          only:
+            - develop
     executor: docker/docker
     steps:
       - setup_remote_docker
