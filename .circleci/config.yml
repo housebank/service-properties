@@ -23,6 +23,7 @@ jobs:
   build_docker_image:
     executor: docker/docker
     steps:
+      - checkout
       - when:
           condition:
             equal: [ develop, << pipeline.git.branch >> ]
