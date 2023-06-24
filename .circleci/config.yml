@@ -23,7 +23,7 @@ jobs:
       - checkout
       - docker/build:
           extra_build_args: '--build-arg FOO=bar --build-arg BAZ=qux'
-          image: housebankng/$CIRCLE_PROJECT_REPONAME:latest
+          image: housebankng/$CIRCLE_PROJECT_REPONAME
       - docker/push:
           image: housebankng/$CIRCLE_PROJECT_REPONAME:latest
           tag: latest
