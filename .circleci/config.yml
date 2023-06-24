@@ -25,7 +25,7 @@ jobs:
           extra_build_args: '--build-arg FOO=bar --build-arg BAZ=qux'
           image: housebankng/$CIRCLE_PROJECT_REPONAME
           tag: latest
-      - docker/push:
+      - docker/publish:
           image: housebankng/$CIRCLE_PROJECT_REPONAME
           tag: latest
 workflows:
