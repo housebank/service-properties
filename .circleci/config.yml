@@ -30,9 +30,9 @@ jobs:
           image: housebankng/$CIRCLE_PROJECT_REPONAME
           tag: latest
 workflows:
-  test-service:
+  Build_and_run_unit_tests:
     jobs:
       - build_and_test
-  build_and_deploy_service_to_docker_hub:
+  Build_and_deploy_service_to_docker_hub:
     jobs:
       - build_docker_image
