@@ -5,11 +5,6 @@ orbs:
 
 jobs:
   build_and_test:
-    build:
-      filters:
-        branches:
-          only:
-            - develop
     executor: node/default
     steps:
       - checkout
