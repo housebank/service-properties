@@ -21,10 +21,12 @@ jobs:
     steps:
       - setup_remote_docker
       - checkout
+      - docker/check
       - docker/build:
           extra_build_args: '--build-arg FOO=bar --build-arg BAZ=qux'
           image: housebankng/$CIRCLE_PROJECT_REPONAME
           tag: latest
+      - docker/check
       - docker/push:
           image: housebankng/$CIRCLE_PROJECT_REPONAME
           tag: latest
