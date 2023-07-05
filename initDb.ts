@@ -20,6 +20,8 @@ function initializeDatabaseTableWithBaseSettingsPlugin(fastify: FastifyInstance,
           table.text('address').notNullable();
           table.timestamp('created_at', { useTz: true }).defaultTo(knex.fn.now(6));
           table.timestamp('updated_at', { useTz: true }).defaultTo(knex.fn.now(6));
+          table.string('construction_year').nullable().defaultTo(null);
+          table.boolean('under_construction').defaultTo(false);
           table.specificType('media', 'integer[]');
           table.string('city').notNullable();
           table.string('country').notNullable();
