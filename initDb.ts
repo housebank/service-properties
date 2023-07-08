@@ -37,7 +37,7 @@ function initializeDatabaseTableWithBaseSettingsPlugin(fastify: FastifyInstance,
           table.integer('rating_id');
           table.specificType('reviews', 'text[]');
           table.specificType('bookings', 'integer[]');
-          table.specificType('history', 'integer[]').defaultTo([0]);
+          table.specificType('history', 'integer[]');
           table.integer('listed_by').unsigned().notNullable();
           table.specificType('tags', 'text[]');
           table.foreign("owner_id").references("id").inTable("user").onDelete("CASCADE");
